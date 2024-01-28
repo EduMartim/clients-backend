@@ -1,43 +1,56 @@
 package com.edu.models;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+// import javax.persistence.Column;
+// import javax.persistence.Entity;
+// import javax.persistence.GeneratedValue;
+// import javax.persistence.GenerationType;
+// import javax.persistence.Id;
+// import javax.persistence.Table;
+// import javax.validation.constraints.NotEmpty;
+// import javax.validation.constraints.NotNull;
+// import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
 import java.util.Objects;
 
 @Entity
-@Table (name = User.TABLE_NAME)
+@Table(name = User.TABLE_NAME)
 public class User {
 
-    public interface CreateUser{}
-    public interface UpdateUser{}
+    public interface CreateUser {
+    }
+
+    public interface UpdateUser {
+    }
 
     public static final String TABLE_NAME = "user";
 
-    /******  ID  ******/
-    @Id 
+    /****** ID ******/
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true)
     private Long id;
 
-    /******  User Name  ******/
+    /****** User Name ******/
     @Column(name = "username", length = 100, nullable = false, unique = true)
     @NotNull(groups = CreateUser.class)
     @NotEmpty(groups = CreateUser.class)
     @Size(groups = CreateUser.class, min = 2, max = 100)
     private String username;
 
-    /******  Password  ******/
+    /****** Password ******/
     @JsonProperty(access = Access.WRITE_ONLY)
     @Column(name = "password", length = 60, nullable = false)
     @NotNull(groups = { CreateUser.class, UpdateUser.class })
@@ -45,20 +58,16 @@ public class User {
     @Size(groups = { CreateUser.class, UpdateUser.class }, min = 8, max = 60)
     private String password;
 
-    //private List<Task> tasks = new ArrayList<Task>{};
-
+    // private List<Task> tasks = new ArrayList<Task>{};
 
     public User() {
     }
-
 
     public User(Long id, String username, String password) {
         this.id = id;
         this.username = username;
         this.password = password;
     }
-
-
 
     public Long getId() {
         return this.id;
@@ -83,7 +92,6 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
-
 
     @Override
     public boolean equals(Object obj) {
@@ -117,5 +125,3 @@ public class User {
     }
 
 }
-
-
