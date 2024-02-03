@@ -15,9 +15,8 @@ import jakarta.transaction.Transactional;
 public class UserService {
 
     @Autowired
-    private UserRepository userRepository; // Injeção de dependência para o UserRepository
+    private UserRepository userRepository;
 
-    // Este método é responsável por buscar um usuario pelo ID
     @Autowired
     private TaskRepository taskRepository;
 
@@ -28,7 +27,6 @@ public class UserService {
                 "Usuário não encontrado! Id: " + id + ", Tipo: " + User.class.getName()));
     }
 
-    // Este método é responsável por criar um usuario
     @SuppressWarnings("null")
     @Transactional
     public User create(User obj) {
@@ -38,7 +36,6 @@ public class UserService {
         return obj;
     }
 
-    // Este método é responsável por atualizar um usuario
     @Transactional
     public User update(User obj) {
         User newObj = findById(obj.getId());
@@ -46,7 +43,6 @@ public class UserService {
         return this.userRepository.save(newObj);
     }
 
-    // Este método é responsável por deletar um usuario
     @SuppressWarnings("null")
     public void delete(Long id) {
         findById(id);
