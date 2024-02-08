@@ -1,6 +1,8 @@
 package com.edu.services;
 
 import java.util.Optional;
+import java.util.List;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
@@ -26,7 +28,12 @@ public class TaskService {
         Optional<Task> task = this.taskRepository.findById(id);
         return task.orElseThrow(() -> new RuntimeException(
                 "Task not found! id: " + id + ", Tipo: " + Task.class.getName()));
+    }
 
+    // Este metodo é responsavel por buscar todas as tarefas de um usuário
+    public List<Task> findAllByUserId(Long userId) {
+        List<Task> tasks = this.taskRepository.findByUser_Id(userId);
+        return tasks;
     }
 
     // Este metodo é responsavel por criar uma tarefa
