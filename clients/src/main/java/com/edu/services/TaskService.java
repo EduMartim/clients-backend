@@ -4,13 +4,14 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.edu.models.Task;
 import com.edu.models.User;
 import com.edu.repositories.TaskRepository;
 
-import jakarta.transaction.Transactional;
-
+@Service
 public class TaskService {
 
     @Autowired
@@ -38,7 +39,6 @@ public class TaskService {
         return obj;
     }
 
-    // Este método é responsável por atualizar uma tarefa
     @Transactional
     public Task update(Task obj) {
         Task newObj = this.findById(obj.getId());
@@ -46,7 +46,6 @@ public class TaskService {
         return this.taskRepository.save(newObj);
     }
 
-    // Este método é responsável por deletar uma tarefa
     public void delete(@NonNull Long id) {
         findById(id);
         try {

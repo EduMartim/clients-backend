@@ -9,7 +9,5 @@ import com.edu.models.Task;
 
 @Repository
 public interface TaskRepository extends JpaRepository<Task, Long> {
-
-    List<Task> findByUserId(Long id);
-
+    List<Task> findByUser_Id(Long id);
 }

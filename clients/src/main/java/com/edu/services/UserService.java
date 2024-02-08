@@ -38,7 +38,6 @@ public class UserService {
         return obj;
     }
 
-    // Este método é responsável por atualizar um usuario
     @Transactional
     public User update(User obj) {
         User newObj = findById(obj.getId());
