@@ -1,4 +1,6 @@
 {
   "terminal.integrated.defaultProfile.windows": "Command Prompt",
   "java.configuration.updateBuildConfiguration": "interactive",
+  "editor.indentSize": "tabSize",
+  "java.compile.nullAnalysis.mode": "automatic"
 }

@@ -1,5 +1,7 @@
 package com.edu.services;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 
@@ -18,21 +20,18 @@ public class TaskService {
     private UserService userService;
 
     // Este metodo é responsavel por buscar uma tarefa pelo ID
-    public Task findByID(Long id) {
-        if (id == null) {
-            throw new IllegalArgumentException("ID cannot be null");
-        }
-        java.util.Optional<Task> task = this.taskRepository.findById(id);
+    public Task findById(Long id) {
+        @SuppressWarnings("null")
+        Optional<Task> task = this.taskRepository.findById(id);
         return task.orElseThrow(() -> new RuntimeException(
-                "Task not found! id: " + id +
-                        ", Tipo: " + Task.class.getName()));
+                "Task not found! id: " + id + ", Tipo: " + Task.class.getName()));
+
     }
 
     // Este metodo é responsavel por criar uma tarefa
-
     @Transactional
     public Task create(Task obj) {
-        User user = this.userService.findByID(obj.getUser().getId());
+        User user = this.userService.findById(obj.getUser().getId());
         obj.setId(null);
         obj.setUser(user);
         obj = this.taskRepository.save(obj);
@@ -42,14 +41,14 @@ public class TaskService {
     // Este método é responsável por atualizar uma tarefa
     @Transactional
     public Task update(Task obj) {
-        Task newObj = this.findByID(obj.getId());
+        Task newObj = this.findById(obj.getId());
         newObj.setDescription(obj.getDescription());
         return this.taskRepository.save(newObj);
     }
 
     // Este método é responsável por deletar uma tarefa
     public void delete(@NonNull Long id) {
-        findByID(id);
+        findById(id);
         try {
             this.taskRepository.deleteById(id);
         } catch (Exception e) {
