@@ -1,4 +1,4 @@
-const url = "http://localhost:8080/tasks/user/1";
+const url = "http://localhost:8080/task/user/1";
 
 function hideLoader() {
     document.getElementById("loading").style.display = "none";
@@ -24,16 +24,19 @@ function show(tasks) {
             <th scope="col">#</th>
             <th scope="col">Description</th>
             <th scope="col">Username</th>
-            <th scope="col">UserI d</th>
-        </thead>`;
+            <th scope="col">UserId</th>
+        </thead>
+    `;
 
-    for (let task in tasks) {
-        tab += `<tr>
-            <td>${task.id}</td>
-            <td>${task.description}</td>
-            <td>${task.user.username}</td>
-            <td>${task.user.id}</td>
-        </tr>`;
+    for (let task of tasks) {
+        tab += `
+            <tr>
+                <td>${task.id}</td>
+                <td>${task.description}</td>
+                <td>${task.user.username}</td>
+                <td>${task.user.id}</td>
+            </tr>
+        `;
     }
     document.getElementById("tasks").innerHTML = tab;
 }
