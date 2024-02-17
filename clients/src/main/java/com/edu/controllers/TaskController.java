@@ -18,6 +18,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.edu.models.Task;
 import com.edu.services.TaskService;
+import com.edu.services.UserService;
 
 import jakarta.validation.Valid;
 
@@ -30,6 +31,10 @@ public class TaskController {
     @Autowired
     private TaskService taskService;
 
+    // Injeção de dependência para o Service
+    @Autowired
+    private UserService userService;
+
     // Este método é responsável por buscar uma tarefa pelo ID
     @GetMapping("/{id}")
     public ResponseEntity<Task> findById(@PathVariable Long id) {
@@ -40,6 +45,7 @@ public class TaskController {
     // Este método é responsável por buscar todas as tarefas de um usuário
     @GetMapping("/user/{userId}")
     public ResponseEntity<List<Task>> findAllByUserId(@PathVariable Long userId) {
+        userService.findById(userId);
         List<Task> objs = this.taskService.findAllByUserId(userId);
         return ResponseEntity.ok().body(objs);
     }
