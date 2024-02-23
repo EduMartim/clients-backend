@@ -14,14 +14,55 @@
   <div class="d-flex justify-content-center">
     <div class="spinner-border" role="status" id="loading"></div>
   </div>
+
   <p class="h1 text-center">Tarefa de um usuário</p>
+
   <table class="table table-hover">
+    <!-- <thead> // esta tabela esta sendo renderizada pelo script.js
+      <th scope="col">#</th>
+      <th scope="col">Description</th>
+      <th scope="col">Username</th>
+      <th scope="col">UserId</th>
+    </thead> -->
     <tbody id="tasks"></tbody>
   </table>
+
+  <div class="d-flex justify-content-center">
+    <button class="btn btn-primary" onclick="create()">Create</button>
+    <button class="btn btn-success" onclick="read()">Read</button>
+    <button class="btn btn-warning" onclick="update()">Update</button>
+    <button class="btn btn-danger" onclick="deleteItem()">Delete</button>
+  </div>
+  
   <script src="/views/script.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
     crossorigin="anonymous"></script>
 </body>
-
 </html>
+
+
+
+<!--
+<body>
+  <div class="d-flex justify-content-center">
+    <div class="spinner-border" role="status" id="loading"></div>
+  </div>
+  <p class="h1 text-center">Tarefa de um usuário</p>
+  <table class="table table-hover">
+    <tbody id="tasks"></tbody>
+  </table>
+
+   this implementation are the CRUD Buttons
+  <div class="d-flex justify-content-center">
+    <button class="btn btn-primary" onclick="create()">Create</button>
+    <button class="btn btn-success" onclick="read()">Read</button>
+    <button class="btn btn-warning" onclick="update()">Update</button>
+    <button class="btn btn-danger" onclick="deleteItem()">Delete</button>
+  </div>
+  
+  <script src="/views/script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+</body>-->

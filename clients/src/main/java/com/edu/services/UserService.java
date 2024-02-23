@@ -20,7 +20,7 @@ public class UserService {
     // Este método é responsável por buscar um usuario pelo ID
     @Autowired
     private TaskRepository taskRepository;
-
+    
     @SuppressWarnings("null")
     public User findById(Long id) {
         Optional<User> user = this.userRepository.findById(id);
@@ -38,6 +38,7 @@ public class UserService {
         return obj;
     }
 
+    // Este método é responsável por atualizar um usuario
     @Transactional
     public User update(User obj) {
         User newObj = findById(obj.getId());

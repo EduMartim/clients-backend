@@ -46,6 +46,7 @@ public class TaskService {
         return obj;
     }
 
+    // Este metodo é responsavel por atualizar uma tarefa
     @Transactional
     public Task update(Task obj) {
         Task newObj = this.findById(obj.getId());
@@ -53,6 +54,7 @@ public class TaskService {
         return this.taskRepository.save(newObj);
     }
 
+    // Este metodo é responsavel por deletar uma tarefa
     public void delete(@NonNull Long id) {
         findById(id);
         try {
