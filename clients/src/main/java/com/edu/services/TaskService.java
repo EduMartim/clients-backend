@@ -3,7 +3,6 @@ package com.edu.services;
 import java.util.Optional;
 import java.util.List;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
@@ -12,6 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.edu.models.Task;
 import com.edu.models.User;
 import com.edu.repositories.TaskRepository;
+import com.edu.services.exeptions.DataBindingViolationException;
+import com.edu.services.exeptions.ObjectNotFoundException;
 
 @Service
 public class TaskService {
@@ -26,7 +27,7 @@ public class TaskService {
     public Task findById(Long id) {
         @SuppressWarnings("null")
         Optional<Task> task = this.taskRepository.findById(id);
-        return task.orElseThrow(() -> new RuntimeException(
+        return task.orElseThrow(() -> new ObjectNotFoundException(
                 "Task not found! id: " + id + ", Tipo: " + Task.class.getName()));
     }
 
@@ -60,7 +61,8 @@ public class TaskService {
         try {
             this.taskRepository.deleteById(id);
         } catch (Exception e) {
-            throw new RuntimeException("It is not possible to delete a task that may be associated to other users");
+            throw new DataBindingViolationException(
+                    "It is not possible to delete a task that may be associated to other users");
         }
     }
 }

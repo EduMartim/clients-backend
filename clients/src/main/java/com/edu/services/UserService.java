@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import com.edu.models.User;
 import com.edu.repositories.TaskRepository;
 import com.edu.repositories.UserRepository;
+import com.edu.services.exeptions.DataBindingViolationException;
+import com.edu.services.exeptions.ObjectNotFoundException;
 
 import jakarta.transaction.Transactional;
 
@@ -20,11 +22,11 @@ public class UserService {
     // Este método é responsável por buscar um usuario pelo ID
     @Autowired
     private TaskRepository taskRepository;
-    
+
     @SuppressWarnings("null")
     public User findById(Long id) {
         Optional<User> user = this.userRepository.findById(id);
-        return user.orElseThrow(() -> new RuntimeException(
+        return user.orElseThrow(() -> new ObjectNotFoundException(
                 "Usuário não encontrado! Id: " + id + ", Tipo: " + User.class.getName()));
     }
 
@@ -53,7 +55,8 @@ public class UserService {
         try {
             this.userRepository.deleteById(id);
         } catch (Exception e) {
-            throw new RuntimeException("Erro ao deletar usuário, pois pode estar associado a outra entidade!");
+            throw new DataBindingViolationException(
+                    "Erro ao deletar usuário, pois pode estar associado a outra entidade!");
         }
     }
 }
